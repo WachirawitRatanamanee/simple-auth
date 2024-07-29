@@ -1,23 +1,41 @@
 import user from "@/models/user";
 import connectDB from "@/utils/database";
 
-export const POST = async (req, res) => {
-  const { username, password, usernameType } = await req.json();
-  // AES-encrypted password
+export const POST = async (req) => {
+  const { name, lastname, email, phoneNumber, password } = await req.json();
+  // AES-encrypted password and stored in the database
 
   try {
     await connectDB();
 
-    const userExists = await user.findOne({
-      [usernameType]: username,
+    const emailExists = await user.findOne({
+      email,
     });
-    if (userExists)
-      return new Response(JSON.stringify({ message: "User already exists" }), {
-        status: 202,
-      });
+
+    const phoneNumberExists = await user.findOne({
+      phoneNumber,
+    });
+
+    if (emailExists)
+      return new Response(
+        JSON.stringify({ message: "Email is already being used." }),
+        {
+          status: 202,
+        }
+      );
+    if (phoneNumberExists)
+      return new Response(
+        JSON.stringify({ message: "Phone number is already being used." }),
+        {
+          status: 202,
+        }
+      );
 
     await user.create({
-      [usernameType]: username,
+      name,
+      lastname,
+      email,
+      phoneNumber,
       password,
     });
   } catch (error) {

@@ -13,17 +13,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       authorize: async (credentials) => {
         await connectDB();
         const { username, password, usernameType } = credentials;
-
         // decrypted and compared with the hashed password in the database
 
         const userExists = await user.findOne({
           [usernameType]: username,
-          password: password,
+          password,
         });
         if (!userExists) {
           throw new Error("Invalid credentials");
         }
-        return userExists;
+        
+        const { password: encrptedPassword, ...userWithoutPassword } =
+          userExists.toObject();
+
+        return userWithoutPassword;
       },
     }),
   ],

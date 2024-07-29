@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .input-container {
+    @apply pb-[3vh] max-sm:pb-[1vh];
+  }
+  .input {
+    @apply w-full border-orange-400 border-b-4 rounded-md py-[1vh] px-[2vh] text-start text-gray-200 bg-slate-700 text-lg max-lg:text-base max-sm:text-xs max-sm:border-b-2;
+  }
+  .error-text-large {
+    @apply text-orange-500 text-sm pt-[1vh] max-sm:text-xs;
+  }
+  .error-text {
+    @apply text-orange-500 text-sm pt-[0.5vh] pb-[1vh] max-sm:text-xs;
+  }
+  .button-submit {
+    @apply w-full rounded-md text-xl py-[2vh] px-[2vh] text-center text-gray-200 bg-red-600 font-semibold max-lg:py-[1vh] max-lg:text-lg max-sm:text-sm hover:bg-red-700 cursor-pointer;
+  }
+}

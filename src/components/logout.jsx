@@ -18,7 +18,7 @@ const Logout = () => {
   };
 
   return (
-    <button className="" onClick={handleLogOut}>
+    <button className="button-submit w-[30vh] max-sm:w-[20vh]" onClick={handleLogOut}>
       Sign Out
     </button>
   );

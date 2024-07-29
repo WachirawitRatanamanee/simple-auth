@@ -1,6 +1,6 @@
 "use client";
 
-import InputForm from "@/components/inputForm";
+import LoginForm from "@/components/loginForm";
 import Logout from "@/components/logout";
 import { signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
@@ -34,20 +34,27 @@ export default function Home() {
   };
 
   return (
-    <main className="">
+    <main className="h-dvh bg-slate-800 flex flex-col text-2xl text-white text-center items-center justify-center">
       {session.status === "authenticated" ? (
-        <div>
-          {session.data.user.name}
-          {session.data.user.tel}
-          {session.data.user.email}
+        <div className="max-sm:text-sm max-lg:text-base">
+          <div>name: {session.data.user.name}</div>
+          <br />
+          <div>lastname: {session.data.user.lastname}</div>
+          <br />
+          <div>
+            email: <br />
+            {session.data.user.phoneNumber}
+          </div>
+          <br />
+          <div>
+            phone number: <br />
+            {session.data.user.email}
+          </div>
+          <br />
           <Logout />
         </div>
       ) : session.status === "unauthenticated" ? (
-        <InputForm
-          buttonName={"Log In"}
-          handleSubmit={handleLogin}
-          buttonToSignup={true}
-        />
+        <LoginForm handleSubmit={handleLogin} />
       ) : (
         <div>loading...</div>
       )}
