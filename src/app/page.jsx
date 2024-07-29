@@ -1,24 +1,56 @@
 "use client";
 
 import InputForm from "@/components/inputForm";
+import Logout from "@/components/logout";
+import { signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import swal from "sweetalert";
 
 export default function Home() {
-  const handleLogin = async (e) => {
+  const session = useSession();
+
+  const handleLogin = async (e, usernameType) => {
     e.preventDefault();
-    console.log("Form submitted");
-    const response = await fetch("/api/auth/4", {
-      method: "GET",
+
+    const username = e.currentTarget.username.value;
+    const password = e.currentTarget.password.value;
+
+    const response = await signIn("credentials", {
+      redirect: false,
+      username,
+      password,
+      usernameType,
     });
-    const data = await response.json();
-    console.log(data);
+
+    if (response.error) {
+      swal(
+        "Please try again",
+        "Invalid username or password. Please try again.",
+        "error"
+      );
+    } else {
+      swal("Awesome!", "successfully Login.", "success");
+    }
   };
+
   return (
     <main className="">
-      <InputForm
-        buttonName={"SignIn"}
-        handleSubmit={handleLogin}
-        buttonToSignup={true}
-      />
+      {session.status === "authenticated" ? (
+        <div>
+          {session.data.user.name}
+          {session.data.user.tel}
+          {session.data.user.email}
+          <Logout />
+        </div>
+      ) : session.status === "unauthenticated" ? (
+        <InputForm
+          buttonName={"Log In"}
+          handleSubmit={handleLogin}
+          buttonToSignup={true}
+        />
+      ) : (
+        <div>loading...</div>
+      )}
     </main>
   );
 }
