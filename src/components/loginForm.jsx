@@ -105,7 +105,7 @@ const LoginForm = ({ handleSubmit }) => {
         <div className="pt-[2vh] max-sm:pt-[1.5vh]">
           <input className="button-submit" type="submit" value="Sign In" />
         </div>
-        <div className="text-lg max-lg:text-base max-sm:text-sm pt-[3vh] max-sm:pt-[1.5vh] flex flex-col">
+        <div className="text-lg max-lg:text-base max-sm:text-sm pt-[3vh] max-sm:pt-[1.5vh] flex max-sm:flex-col">
           <div className="text-gray-400">New to Netflix? &nbsp;</div>
           <Link className="hover:text-gray-300" href="/signup">
             Sign up now.

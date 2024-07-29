@@ -186,7 +186,7 @@ const RegisterForm = ({ handleSubmit }) => {
           <div className="pb-[3vh] max-sm:pb-[2vh]"></div>
         )}
         <input className="button-submit" type="submit" value="Register" />
-        <div className="text-lg max-lg:text-base max-sm:text-sm pt-[1.5vh] flex flex-col">
+        <div className="text-lg max-lg:text-base max-sm:text-sm pt-[1.5vh] flex max-sm:flex-col">
           <div className="text-gray-400">Have an account? &nbsp;</div>
           <Link href="/" className="border-black border-2">
             Back to Login Page.
