@@ -43,12 +43,12 @@ export default function Home() {
           <br />
           <div>
             email: <br />
-            {session.data.user.phoneNumber}
+            {session.data.user.email}
           </div>
           <br />
           <div>
             phone number: <br />
-            {session.data.user.email}
+            {session.data.user.phoneNumber}
           </div>
           <br />
           <Logout />
